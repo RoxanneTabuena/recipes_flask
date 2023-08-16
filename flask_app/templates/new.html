@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-orange.css">
+    <title>Document</title>
+    <style>
+        .logo {
+            opacity: .2;
+        }
+        ::placeholder {
+            font-weight: bold;
+            color: white;
+            opacity: 1; /* Firefox */
+        }
+
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            font-weight: bold;
+            color: white;
+        }
+
+        ::-ms-input-placeholder { /* Microsoft Edge */
+            font-weight: bold;
+            color: white;
+        }
+        </style>
+</head>
+<body>
+    <div class="w3-display-container">
+        <div class="w3-row">
+            <div class="w3-col m6 s12">
+                <h1 class="w3-text-theme w3-margin-left w3-hide-small" style="text-shadow:1px 1px 0 #c5c5c5"><b>Add a New Recipe!</b></h1>
+            </div>
+            <div class="w3-col m6 s12">
+                <div class="w3-row w3-margin">
+                    <a href="/logout" class="w3-btn w3-text-theme w3-white w3-round-large w3-right" >Logout</a>
+                    <a href="/recipes" class="w3-btn w3-text-theme w3-white w3-round-large w3-right" >Back to Recipes</a>
+                </div>
+            </div>
+        </div>
+        <div class="w3-container">
+            <div class="w3-card-4 w3-margin-bottom">
+                <form action="/create" method="post">
+                    <div class="w3-container w3-padding w3-orange">
+                        <input class="w3-input w3-text-white w3-orange w3-border-0" type="text" name="name" placeholder="(Enter New Recipe Name Here)">
+                    </div>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages%}
+                                <p class="w3-text-theme w3-margin-left">{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <div class="w3-row w3-theme-l5">
+                        <div class="w3-col w3-half">
+                            <div class="w3-container w3-padding">
+                                <label class="w3-text-theme">Description:</label>
+                                <textarea class="w3-input w3-round w3-text-theme" type="text" name="description" rows="2" cols="30"></textarea>
+                                <label class="w3-text-theme">Instructions:</label>
+                                <textarea class="w3-input w3-round w3-text-theme" type="text" name="instructions" rows="5" cols="30"></textarea>
+                            </div>
+                        </div>
+                        <div class="w3-col w3-half">
+                            <br>
+                            <div class="w3-container w3-padding">
+                                <label class="w3-text-theme" for="date_made">I made this on:</label>
+                                <input class="w3-text-theme" type="date" name="date_made">
+                                <br>
+                                <br>
+                                <p class="w3-text-theme">Under 30 minutes?</p>
+                                <p class="w3-text-theme">
+                                    <input class="w3-radio" type="radio" name="under_30" value="no" checked>
+                                    <label>No</label>
+                                    <input class="w3-radio" type="radio" name="under_30" value="yes">
+                                    <label>Yes</label>
+                                </p>
+                            </div>
+                            <br>
+                            <button class="w3-btn w3-margin w3-orange w3-text-white w3-right w3-round" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+        <h1 class="w3-text-theme w3-opacity w3-display-bottomright w3-hide-small w3-margin w3-margin-top w3-padding logo"><b>Recipe Share</b></h1>
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
+    <title>Document</title>
+    <style>
+        .logo {
+            opacity: .2;
+        }
+    </style>
+</head>
+<body>
+    <div class="w3-display-container">
+        <div class="w3-row">
+            <div class="w3-col m6 s12">
+                <h1 class="w3-text-theme w3-margin-left w3-hide-small" style="text-shadow:1px 1px 0 #c5c5c5"><b>Welcome, {{ user.first_name }}</b></h1>
+            </div>
+            <div class="w3-col m4 s12">
+                <br>
+            </div>
+            <div class="w3-col m2 s12">
+                <a href="/logout" class="w3-btn w3-white w3-text-theme w3-round w3-right w3-section w3-margin">Log Out</a>
+            </div>
+        </div>
+        <div class="w3-container">
+            <h5 class="w3-text-theme w3-left w3-margin-top"><b>All Posted Recipes:</b></h5>
+            <table class="w3-table w3-text-theme w3-card-4">
+                <tr class="w3-theme ">
+                    <th >Name</th>
+                    <th >< 30min</th>
+                    <th >Posted By:</th>
+                    <th >Actions:</th>
+                </tr>
+                {% for recipe in recipes %}
+                <tr class="w3-hover-pale-green w3-hover-text-green w3-center">
+                    <td >{{ recipe.name }}</td>
+                    <td >{{ recipe.under_30 }}</td>
+                    <td >{{ recipe.creator.first_name }}</td>
+                    <td >
+                        <a href="/view/{{ recipe.id }}">view</a>
+                        {% if recipe.creator.id == session['user_id'] %}
+                        <a href="/edit/{{ recipe.id }}">edit</a>
+                        <a href="/delete/{{ recipe.id }}">delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <a href="/new" class="w3-btn w3-theme w3-round-large w3-section w3-right w3-small">+ Create</a>
+        </div>
+        <br>
+        <br>
+        <br>
+        <h1 class="w3-text-theme w3-display-bottomright w3-hide-small w3-margin w3-padding logo"><b>Recipe Share</b></h1>
+    </div>
+</body>
+</html>

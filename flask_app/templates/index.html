@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-deep-purple.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="w3-container">
+        <h1 class="w3-text-theme w3-margin-left" style="text-shadow:1px 1px 0 #c5c5c5"><b>Recipe Share</b></h1>
+        {% if session['bad_egg'] == True and not session['login_attempt'] and not session['reg_attempt']: %}
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages%}
+                        <h3 class="w3-text-red w3-margin-left">{{ message }}</h3>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+        <div class="w3-row-padding">
+            <div class="w3-col m6 s12">
+                <div class="w3-card-4 w3-margin-bottom">
+                    <div class="w3-container w3-theme">
+                        <h3>Register</h3>
+                    </div>
+                    <form class="w3-container w3-padding w3-theme-l5" action="/register" method="post">
+                        {% if session['reg_attempt'] == True: %}
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    {% for message in messages%}
+                                        <p>{{ message }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        {% endif %}
+                        <label class="w3-text-theme">First Name:</label>
+                        <input class="w3-input w3-round w3-text-theme" type="text" name="first_name">
+                        <label class="w3-text-theme">Last Name:</label>
+                        <input class="w3-input w3-round w3-text-theme" type="text" name="last_name">
+                        <label class="w3-text-theme">Email:</label>
+                        <input class="w3-input w3-round w3-text-theme" type="text" name="email">
+                        <label class="w3-text-theme">Password:</label>
+                        <input class="w3-input w3-round w3-text-theme" type="password" name="password">
+                        <label class="w3-text-theme">Confirm Password:</label>
+                        <input class="w3-input w3-round w3-text-theme" type="password" name="password_conf">
+                        <button class="w3-btn w3-margin-top w3-theme w3-right w3-round" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="w3-col m6 s12">
+                <div class="w3-card-4">
+                    <div class="w3-container w3-theme">
+                        <h3>Login</h3>
+                    </div>
+                    <form class="w3-container w3-padding w3-theme-l5" action="/login" method="post">
+                        {% if session['login_attempt'] == True: %}
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    {% for message in messages%}
+                                        <p>{{ message }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        {% endif %}
+                        <label class="w3-text-theme">Email:</label>
+                        <input class="w3-input w3-round w3-text-theme" type="text" name="email">
+                        <label class="w3-text-theme">Password:</label>
+                        <input class="w3-input w3-round w3-text-theme" type="password" name="password">
+                        <button class="w3-btn w3-margin-top w3-theme w3-right w3-round" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

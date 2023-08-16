@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-amber.css">
+    <title>Document</title>
+    <style>
+        .logo {
+            opacity: .2;
+        }
+    </style>
+</head>
+<body>
+    <div class="w3-display-container">
+        <div class="w3-row">
+            <div class="w3-col m5 s12">
+                <h1 class="w3-text-theme w3-margin-left w3-hide-small" style="text-shadow:1px 1px 0 #c5c5c5"><b>Welcome, {{ user.first_name }}</b></h1>
+            </div>
+            <div class="w3-col m1 s12">
+                <br>
+            </div>
+            <div class="w3-col m6 s12">
+                <div class="w3-row w3-margin">
+                    <a href="/logout" class="w3-btn w3-text-theme w3-white w3-round-large w3-right" >Logout</a>
+                    <a href="/recipes" class="w3-btn w3-text-theme w3-white w3-round-large w3-right" >Back to Recipes</a>
+                </div>
+            </div>
+        </div>
+        <div class="w3-container">
+            <div class="w3-card-4 w3-margin-bottom">
+                <div class="w3-row-padding w3-amber w3-text-white">
+                    <div class="w3-half">
+                        <h5 class="w3-left w3-margin-top"><b>{{ recipe.name }}</b></h5>
+                    </div>
+                    <div class="w3-half">
+                        <h5 class="w3-right w3-margin-top"><b>{{ recipe.creator.first_name }}&nbsp{{ recipe.creator.last_name }}</b></h5>
+                    </div>
+                </div>
+                <table class="w3-theme-l5 w3-text-theme w3-table">
+                    <tr>
+                        <td>Description:</td>
+                        <td>{{ recipe.description }}</td>
+                    </tr>
+                    <tr>
+                        <td>Under 30 min?</td>
+                        <td>{{ recipe.under_30 }}</td>
+                    </tr>
+                    <tr>
+                        <td>Instructions:</td>
+                        <td>{{ recipe.instructions }}</td>
+                    </tr>
+                    <tr>
+                        <td>Date Made:</td>
+                        <td>{{ recipe.date_made.strftime('%B %d, %Y') }}</td>
+                    </tr>
+                </table>
+            </div>
+            {% if recipe.creator.id == session['user_id'] %}
+            <div class="w3-row w3-margin">
+                <a href="/delete/{{ recipe.id }}" class="w3-btn w3-text-theme w3-white w3-round-large w3-right">delete</a>
+                <a href="/edit/{{ recipe.id }}" class="w3-btn w3-text-theme w3-white w3-round-large w3-right">edit</a>
+            </div>
+            {% endif %}
+            <br>
+            <br>
+            <br>
+        </div>
+        <h1 class="w3-text-theme w3-display-bottomright w3-hide-small w3-margin w3-padding logo"><b>Recipe Share</b></h1>
+    </div>
+</body>
+</html>
